@@ -5,8 +5,8 @@ locals {
 }
 
 resource "azurerm_public_ip" "ip" {
-  location            = local.ip_name
-  name                = var.ip_name
+  name                = local.ip_name
+  location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = local.ip_allocation_method
 
@@ -18,8 +18,8 @@ resource "azurerm_public_ip" "ip" {
 resource "azurerm_public_ip" "active_active_ip" {
   count = var.active_active ? 1 : 0
 
-  location            = local.active_active_ip_name
-  name                = var.active_active_ip_name
+  name                = local.active_active_ip_name
+  location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = local.ip_allocation_method
 
