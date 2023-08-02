@@ -63,21 +63,10 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "ip_name" {
-  description = "(Required) The name for the public ip of the default ip configuration."
-  type        = string
-}
-
 variable "active_active" {
   description = "(Optional) Is the virtual network gateway in active active mode."
   type        = bool
   default     = false
-}
-
-variable "active_active_ip_name" {
-  description = "(Optional) The name for the public ip of the active active ip configuration, Required if active-active mode is enabled."
-  type        = string
-  default     = null
 }
 
 variable "vpn_address_space" {
