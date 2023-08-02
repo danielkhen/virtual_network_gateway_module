@@ -46,7 +46,6 @@ data "azurerm_log_analytics_workspace" "activity" {
 
 locals {
   virtual_network_gateway_name       = "vng"
-  virtual_network_gateway_ip         = "vng-ip"
   virtual_network_gateway_sku        = "VpnGw1"
   virtual_network_gateway_type       = "Vpn"
   virtual_network_gateway_generation = "Generation1"
@@ -58,7 +57,6 @@ module "virtual_network_gateway" {
   name                = local.virtual_network_gateway_name
   location            = local.location
   resource_group_name = azurerm_resource_group.test_rg.name
-  ip_name             = local.virtual_network_gateway_ip
   sku                 = local.virtual_network_gateway_sku
   type                = local.virtual_network_gateway_type
   generation          = local.virtual_network_gateway_generation
