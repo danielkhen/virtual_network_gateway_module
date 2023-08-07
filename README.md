@@ -13,9 +13,7 @@
 | <a name="input_aad_audience"></a> [aad\_audience](#input\_aad\_audience) | (Optional) The aad audience id, Required For aad authentication. | `string` | `""` | no |
 | <a name="input_aad_tenant"></a> [aad\_tenant](#input\_aad\_tenant) | (Optional) The aad tenant id, Required for AAD authentication. | `string` | `""` | no |
 | <a name="input_active_active"></a> [active\_active](#input\_active\_active) | (Optional) Is the virtual network gateway in active active mode. | `bool` | `false` | no |
-| <a name="input_active_active_ip_name"></a> [active\_active\_ip\_name](#input\_active\_active\_ip\_name) | (Optional) The name for the public ip of the active active ip configuration, Required if active-active mode is enabled. | `string` | `null` | no |
 | <a name="input_generation"></a> [generation](#input\_generation) | (Optional) The generation of the virtual network gateway. | `string` | `"None"` | no |
-| <a name="input_ip_name"></a> [ip\_name](#input\_ip\_name) | (Required) The name for the public ip of the default ip configuration. | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | (Required) The location of the virtual network gateway. | `string` | n/a | yes |
 | <a name="input_log_analytics_id"></a> [log\_analytics\_id](#input\_log\_analytics\_id) | (Required) The id of the log analytics workspace. | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name for the virtual network gateway. | `string` | n/a | yes |
@@ -65,14 +63,12 @@ module "virtual_network_gateway" {
   name                = "example-vng"
   location            = "westeurope"
   resource_group_name = azurerm_resource_group.example.name
-  default_ip_name     = "default-ip"
   sku                 = "VpnGw1"
   type                = "Vpn"
   generation          = "Generation1"
   subnet_id           = azurerm_subnet.example.id
 
   active_active = true # Active active requires a second public ip
-  aa_ip_name    = "aa-ip"
 
   vpn_address_space = ["172.0.0.0/16"] # enables p2s and default auth (AAD) requires aad credentials
   aad_tenant        = local.aad_tenant #should be sensitive

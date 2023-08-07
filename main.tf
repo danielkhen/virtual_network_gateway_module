@@ -16,7 +16,7 @@ resource "azurerm_public_ip" "ip" {
 }
 
 resource "azurerm_public_ip" "active_active_ip" {
-  for_each = var.active_active ? [true] : []
+  for_each = var.active_active ? ["true"] : []
 
   name                = local.active_active_ip_name
   location            = var.location
@@ -65,7 +65,7 @@ resource "azurerm_virtual_network_gateway" "vnet_gateway" {
   }
 
   dynamic "vpn_client_configuration" {
-    for_each = var.vpn_address_space == null ? [] : ['true']
+    for_each = var.vpn_address_space == null ? [] : [true]
 
     content {
       address_space        = var.vpn_address_space
@@ -128,7 +128,7 @@ module "ip_diagnostic" {
 
 module "active_active_ip_diagnostic" {
   source   = "github.com/danielkhen/diagnostic_setting_module"
-  for_each = var.active_active ? ['true'] : []
+  for_each = var.active_active ? ["true"] : []
 
   name                       = local.active_active_ip_diagnostic_name
   target_resource_id         = azurerm_public_ip.active_active_ip[0].id
