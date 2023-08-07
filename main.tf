@@ -16,7 +16,7 @@ resource "azurerm_public_ip" "ip" {
 }
 
 resource "azurerm_public_ip" "active_active_ip" {
-  count = var.active_active ? 1 : 0
+  for_each = var.active_active ? [true] : []
 
   name                = local.active_active_ip_name
   location            = var.location
@@ -126,8 +126,8 @@ module "ip_diagnostic" {
 }
 
 module "active_active_ip_diagnostic" {
-  source = "github.com/danielkhen/diagnostic_setting_module"
-  count  = var.active_active ? 1 : 0
+  source   = "github.com/danielkhen/diagnostic_setting_module"
+  for_each = var.active_active ? [true] : []
 
   name                       = local.active_active_ip_diagnostic_name
   target_resource_id         = azurerm_public_ip.active_active_ip[0].id
