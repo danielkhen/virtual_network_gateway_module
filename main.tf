@@ -44,7 +44,6 @@ resource "azurerm_virtual_network_gateway" "vnet_gateway" {
   sku                 = var.sku
   generation          = var.generation
   active_active       = var.active_active
-  #TODO remove public
 
   ip_configuration {
     name                          = local.default_ip_configuration_name
